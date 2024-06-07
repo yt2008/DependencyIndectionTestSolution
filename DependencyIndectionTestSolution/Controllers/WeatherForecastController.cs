@@ -1,3 +1,4 @@
+using DependencyIndectionTestSolution.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DependencyIndectionTestSolution.Controllers
@@ -6,28 +7,21 @@ namespace DependencyIndectionTestSolution.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IService1 _service1;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IService1 service1)
         {
             _logger = logger;
+            _service1 = service1;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<IEnumerable<WeatherForecast>> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return await _service1.GetResult1Async();
         }
     }
 }

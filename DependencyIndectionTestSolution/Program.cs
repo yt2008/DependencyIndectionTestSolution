@@ -1,3 +1,6 @@
+using DependencyIndectionTestSolution.DataProviders;
+using DependencyIndectionTestSolution.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddTransient<IService1, Service1>();
+builder.Services.AddTransient<IDataProvider1, DataProvider1>();
+
+
 
 var app = builder.Build();
 
