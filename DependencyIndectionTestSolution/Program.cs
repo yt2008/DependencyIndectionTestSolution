@@ -10,8 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<IService1, Service1>();
-builder.Services.AddTransient<IDataProvider1, DataProvider1>();
+builder.Services.AddScoped<IService1, Service1>();
+builder.Services.AddScoped<IDataProvider1, DataProvider1>(_ => new DataProvider1("username123", "password123"));
 
 
 

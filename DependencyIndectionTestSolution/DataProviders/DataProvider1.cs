@@ -2,6 +2,10 @@
 {
     public class DataProvider1 : IDataProvider1
     {
+        public DataProvider1(string username, string password)
+        {
+            //todo:...
+        }
 
         private static readonly string[] Summaries = new[]
         {
